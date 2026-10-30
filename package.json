@@ -1,0 +1,94 @@
+{
+  "name": "dsh-cursor",
+  "version": "0.2.0",
+  "description": "Cursor model provider for DeepSeek Harness",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./client": "./lib/client.js"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dsh": "^0.2.1-rc.2",
+      "dshReleases": {
+        "0.2.1-rc.2": "compatible"
+      }
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "files": [
+    "lib",
+    "bin",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/keys.js && node --check lib/client.js && node --check lib/catalog.js && node --check lib/transcript.js && node --check lib/bridge.js && node --check lib/errors.js && node --check bin/cursor-login.mjs",
+    "test": "node --test test/*.test.mjs",
+    "pack:dist": "node -e \"require('node:fs').mkdirSync('dist',{recursive:true})\" && npm pack --pack-destination dist"
+  },
+  "engines": {
+    "node": ">=22.13",
+    "dsh": "^0.2.1-rc.2"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cursor",
+    "llm",
+    "adapter",
+    "provider"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@cursor/sdk": "^1.2.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-credentials": "^0.2.1-rc.2",
+    "@deepseek-ai/dsh-launch-environment": "^0.2.1-rc.2",
+    "@deepseek-ai/dsh-llm": "^0.2.1-rc.2",
+    "@deepseek-ai/schemastery": "^0.2.1-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-credentials": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-launch-environment": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-llm": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "bin": {
+    "dsh-cursor": "bin/cursor-login.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atticuswx/dsh-cursor.git"
+  },
+  "homepage": "https://github.com/atticuswx/dsh-cursor#readme",
+  "bugs": {
+    "url": "https://github.com/atticuswx/dsh-cursor/issues"
+  },
+  "author": "atticuswx"
+}
